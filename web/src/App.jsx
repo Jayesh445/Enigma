@@ -4,7 +4,6 @@ import "./App.css";
 import Homepage from "./pages/HomePage";
 import SignInPage from "./pages/Signin";
 import LoginPage from "./pages/LoginPage";
-
 import FullScreenQuiz from "./components/Quiz";
 
 function App() {
