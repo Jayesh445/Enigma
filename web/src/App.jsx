@@ -1,15 +1,22 @@
-import React, { useState } from "react";
-import StartButton from "./components/StartButton";
-import TestTimer from "./components/TestTimer";
-import QuestionComponent from "./components/QuestionComponent";
-import FaceDetectionComponent from "./components/FaceDetectionComponent";
-import QuestionList from "./components/QuestionList";
-import QuizApp from "./components/Quiz";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
-const App = () => {
+import Homepage from "./pages/HomePage";
+import SignInPage from "./pages/Signin";
+import LoginPage from "./pages/LoginPage";
+
+import RegisterPage from "./pages/Register";
+
+function App() {
   return (
     <>
-      <QuizApp />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+        </Routes>
+      </Router>
     </>
   );
 };
