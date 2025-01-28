@@ -5,8 +5,6 @@ import Homepage from "./pages/HomePage";
 import SignInPage from "./pages/Signin";
 import LoginPage from "./pages/LoginPage";
 
-import RegisterPage from "./pages/Register";
-
 function App() {
   return (
     <>
@@ -19,6 +17,6 @@ function App() {
       </Router>
     </>
   );
-};
+}
 
 export default App;
