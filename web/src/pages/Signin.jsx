@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Button, CircularProgress, TextField, Typography, Container, Card, Snackbar, Alert, IconButton } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+  Container,
+  Card,
+  Snackbar,
+  Alert,
+  IconButton,
+} from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignInPage = () => {
-  const [loading, setLoading] = useState(false);
-  const[name, setName] = useState("")
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -45,14 +54,18 @@ const SignInPage = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            bgcolor: "white",  // White background for the form
+            bgcolor: "white", // White background for the form
             p: 6,
             borderRadius: 2,
             boxShadow: 3,
             width: "100%",
           }}
         >
-          <Typography variant="h5" component="h1" className="text-blue-600 text-center mb-6">
+          <Typography
+            variant="h5"
+            component="h1"
+            className="text-blue-600 text-center mb-6"
+          >
             Sign In
           </Typography>
 
@@ -68,7 +81,7 @@ const SignInPage = () => {
           </Snackbar>
 
           <form className="w-full" noValidate onSubmit={handleSignIn}>
-          <TextField
+            <TextField
               variant="outlined"
               margin="normal"
               required
@@ -81,8 +94,10 @@ const SignInPage = () => {
               autoComplete="email"
               autoFocus
               className="mb-4"
-              helperText={email && !email.includes('@') ? "Please enter a name" : ""}
-              error={email && !email.includes('@')}
+              helperText={
+                email && !email.includes("@") ? "Please enter a name" : ""
+              }
+              error={email && !email.includes("@")}
               InputLabelProps={{
                 shrink: true, // For better focus
               }}
@@ -107,8 +122,12 @@ const SignInPage = () => {
               autoComplete="email"
               autoFocus
               className="mb-4"
-              helperText={email && !email.includes('@') ? "Please enter a valid email" : ""}
-              error={email && !email.includes('@')}
+              helperText={
+                email && !email.includes("@")
+                  ? "Please enter a valid email"
+                  : ""
+              }
+              error={email && !email.includes("@")}
               InputLabelProps={{
                 shrink: true, // For better focus
               }}
@@ -134,7 +153,11 @@ const SignInPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
               className="mb-6"
-              helperText={password && password.length < 6 ? "Password must be at least 6 characters" : ""}
+              helperText={
+                password && password.length < 6
+                  ? "Password must be at least 6 characters"
+                  : ""
+              }
               error={password && password.length < 6}
               InputLabelProps={{
                 shrink: true,
@@ -170,13 +193,20 @@ const SignInPage = () => {
               className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-indigo-700 transition-all duration-300 ease-in-out"
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Sign In"}
+              {loading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                "Sign In"
+              )}
             </Button>
 
             {/* Sign-Up Link */}
             <div className="text-center">
               <Typography variant="body2" color="textSecondary">
-                <a href="/forgot-password" className="text-blue-500 hover:underline">
+                <a
+                  href="/forgot-password"
+                  className="text-blue-500 hover:underline"
+                >
                   Forgot Password?
                 </a>
               </Typography>
