@@ -5,7 +5,7 @@ import Homepage from "./pages/HomePage";
 import SignInPage from "./pages/Signin";
 import LoginPage from "./pages/LoginPage";
 
-import RegisterPage from "./pages/Register";
+import FullScreenQuiz from "./components/Quiz";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signin" element={<SignInPage />} />
+          <Route path="/quiz" element={<FullScreenQuiz />} />
         </Routes>
       </Router>
     </>
