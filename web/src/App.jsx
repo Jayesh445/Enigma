@@ -1,11 +1,12 @@
 
 import "./App.css";
+import Homepage from "./pages/HomePage";
 
 function App() {
 
   return (
     <>
-      <h1 className="bg-red-400">hello</h1>
+      <Homepage/>
     </>
   );
 }
