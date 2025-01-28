@@ -65,3 +65,38 @@ export const Login = async (req, res) => {
     token,
   });
 };
+
+export const userExists = async (req, res) => {
+  try {
+    let { userId } = req.body;
+
+    let user = await User.findOne({
+      email: userId.trim().toLowerCase(),
+    });
+    if (!user) {
+      return res
+        .status(201)
+        .json({ message: "User not found", success: false });
+    }
+    return res
+      .status(200)
+      .json({ message: "User exists", success: true, user: user });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updatePassword = async (req, res) => {
+  // Update password logic here
+  let { userId, password } = req.body;
+  let user = await User.findOne({ username: userId });
+  if (!user) {
+    return res.status(404).json({ message: "User not found", success: false });
+  }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  user.password = hashedPassword;
+  await user.save();
+  return res
+    .status(200)
+    .json({ message: "Password updated successfully", success: true });
+};
