@@ -1,13 +1,17 @@
+import React, { useState } from "react";
+import StartButton from "./components/StartButton";
+import TestTimer from "./components/TestTimer";
+import QuestionComponent from "./components/QuestionComponent";
+import FaceDetectionComponent from "./components/FaceDetectionComponent";
+import QuestionList from "./components/QuestionList";
+import QuizApp from "./components/Quiz";
 
-import "./App.css";
-
-function App() {
-
+const App = () => {
   return (
     <>
-      <h1 className="bg-red-400">hello</h1>
+      <QuizApp />
     </>
   );
-}
+};
 
 export default App;
