@@ -37,6 +37,9 @@ const Content = () => {
       >
         Our school is dedicated to providing a top-notch education and fostering a strong community.
       </Typography>
+
+=======
+
     </Box>
   );
 };
