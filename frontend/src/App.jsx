@@ -8,7 +8,8 @@ function App() {
 
   return (
     <>
-    <h1>Hi</h1>
+    <h1>Hidas</h1>
+    <button>Got</button>
     </>
   )
 }
