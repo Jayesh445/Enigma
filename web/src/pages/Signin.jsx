@@ -1,58 +1,35 @@
 import React, { useState } from "react";
-import axios from "axios";
-import {
-  Button,
-  CircularProgress,
-  TextField,
-  Typography,
-  Container,
-  Card,
-  Snackbar,
-  Alert,
-  IconButton,
-} from "@mui/material";
+import { Button, CircularProgress, TextField, Typography, Container, Card, Snackbar, Alert, IconButton } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignInPage = () => {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
+  const[name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const handleSignIn = async (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
     setLoading(true);
     setIsError(false);
 
-    try {
-      const res = await axios.post(
-        "http://localhost:8080/api/register", // Your backend API for login
-        {
-          name,
-          email,
-          password,
-        },
-        {
-          withCredentials: true, // Send cookies with the request for cross-origin requests
-        }
-      );
-      if (res.data.success) {
-        window.location.href = "/dashboard";
+    setTimeout(() => {
+      setLoading(false);
+      if (email === "test@example.com" && password === "password") {
+        setSnackbarMessage("Sign In Successful");
+        setOpenSnackbar(true);
+        setIsError(false);
+      } else {
+        setSnackbarMessage("Invalid email or password");
+        setOpenSnackbar(true);
+        setIsError(true);
       }
-      setLoading(false);
-      setSnackbarMessage("Sign In Successful");
-      setOpenSnackbar(true);
-      setIsError(false);
-    } catch (error) {
-      setLoading(false);
-      setSnackbarMessage("Invalid email or password");
-      setOpenSnackbar(true);
-      setIsError(true);
-    }
+    }, 2000);
   };
 
   const handleClickShowPassword = () => {
@@ -60,7 +37,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-pink-500 to-blue-600 min-h-screen flex justify-center items-center">
+    <div className="bg-gradient-to-r from-purple-500 to-indigo-600 min-h-screen flex justify-center items-center">
       <Container component="main" maxWidth="xs">
         <Card
           sx={{
@@ -68,18 +45,14 @@ const SignInPage = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            bgcolor: "white", // White background for the form
+            bgcolor: "white",  // White background for the form
             p: 6,
             borderRadius: 2,
             boxShadow: 3,
             width: "100%",
           }}
         >
-          <Typography
-            variant="h5"
-            component="h1"
-            className="text-blue-600 text-center mb-6"
-          >
+          <Typography variant="h5" component="h1" className="text-blue-600 text-center mb-6">
             Sign In
           </Typography>
 
@@ -95,8 +68,7 @@ const SignInPage = () => {
           </Snackbar>
 
           <form className="w-full" noValidate onSubmit={handleSignIn}>
-            {/* Name Input */}
-            <TextField
+          <TextField
               variant="outlined"
               margin="normal"
               required
@@ -106,11 +78,21 @@ const SignInPage = () => {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
+              autoComplete="email"
               autoFocus
               className="mb-4"
+              helperText={email && !email.includes('@') ? "Please enter a name" : ""}
+              error={email && !email.includes('@')}
+              InputLabelProps={{
+                shrink: true, // For better focus
+              }}
+              sx={{
+                transition: "all 0.3s ease",
+                "&:focus-within": {
+                  borderColor: "#3f51b5",
+                },
+              }}
             />
-
             {/* Email Input */}
             <TextField
               variant="outlined"
@@ -125,9 +107,20 @@ const SignInPage = () => {
               autoComplete="email"
               autoFocus
               className="mb-4"
+              helperText={email && !email.includes('@') ? "Please enter a valid email" : ""}
+              error={email && !email.includes('@')}
+              InputLabelProps={{
+                shrink: true, // For better focus
+              }}
+              sx={{
+                transition: "all 0.3s ease",
+                "&:focus-within": {
+                  borderColor: "#3f51b5",
+                },
+              }}
             />
 
-            {/* Password Input with Visibility Toggle */}
+            {/* Password Input */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -141,6 +134,17 @@ const SignInPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
               className="mb-6"
+              helperText={password && password.length < 6 ? "Password must be at least 6 characters" : ""}
+              error={password && password.length < 6}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{
+                transition: "all 0.3s ease",
+                "&:focus-within": {
+                  borderColor: "#3f51b5",
+                },
+              }}
               InputProps={{
                 endAdornment: (
                   <IconButton
@@ -163,26 +167,16 @@ const SignInPage = () => {
               fullWidth
               variant="contained"
               color="primary"
-              className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300 ease-in-out"
+              className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-indigo-700 transition-all duration-300 ease-in-out"
               disabled={loading}
             >
-              {loading ? (
-                <CircularProgress size={24} color="inherit" />
-              ) : (
-                <>
-                  <LockOutlined className="mr-2" />
-                  Sign In
-                </>
-              )}
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Sign In"}
             </Button>
 
-            {/* Forgot Password Link */}
+            {/* Sign-Up Link */}
             <div className="text-center">
               <Typography variant="body2" color="textSecondary">
-                <a
-                  href="/forgot-password"
-                  className="text-blue-500 hover:underline"
-                >
+                <a href="/forgot-password" className="text-blue-500 hover:underline">
                   Forgot Password?
                 </a>
               </Typography>
