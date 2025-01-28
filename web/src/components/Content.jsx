@@ -6,7 +6,7 @@ const Content = () => {
     <Box
       sx={{
         position: 'fixed',
-        bottom: 210, // Adjust the value for desired spacing from the bottom
+        bottom: 0, // Adjust the value for desired spacing from the bottom
         right: 16, // Adjust the value for desired spacing from the right
         padding: 4,
         textAlign: 'center',
@@ -31,9 +31,7 @@ const Content = () => {
       >
         Our school is dedicated to providing a top-notch education and fostering a strong community.
       </Typography>
-      <Button variant="contained" color="primary" href="#signin">
-        Sign In
-      </Button>
+     
     </Box>
   );
 };

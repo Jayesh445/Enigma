@@ -12,23 +12,9 @@ const SignInPage = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async(e) => {
     e.preventDefault();
-    setLoading(true);
-    setIsError(false);
-
-    setTimeout(() => {
-      setLoading(false);
-      if (email === "test@example.com" && password === "password") {
-        setSnackbarMessage("Sign In Successful");
-        setOpenSnackbar(true);
-        setIsError(false);
-      } else {
-        setSnackbarMessage("Invalid email or password");
-        setOpenSnackbar(true);
-        setIsError(true);
-      }
-    }, 2000);
+   const res = await fetch("https://localhost:5173/")
   };
 
   const handleClickShowPassword = () => {
