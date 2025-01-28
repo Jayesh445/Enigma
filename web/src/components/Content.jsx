@@ -6,7 +6,7 @@ const Content = () => {
     <Box
       sx={{
         position: 'fixed',
-        bottom: 180, // Adjust the value for desired spacing from the bottom
+        bottom: 210, // Adjust the value for desired spacing from the bottom
         right: 16, // Adjust the value for desired spacing from the right
         padding: 4,
         textAlign: 'center',

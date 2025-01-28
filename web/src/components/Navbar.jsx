@@ -13,9 +13,9 @@ const Navbar = () => {
     alt="React Logo"
     className="w-16 h-16 object-contain" 
   />
-  <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-orange-500 text-3xl font-semibold tracking-wide">
-    Lokmanya Tilak School
-  </h1>
+ <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-600 text-3xl font-semibold tracking-wide">
+        Lokmanya Tilak School
+      </h1>
 </div>
           <div className="flex space-x-6">
           <button className="flex items-center text-black hover:underline px-4 py-2 rounded-md transition duration-300 ease-in-out">
