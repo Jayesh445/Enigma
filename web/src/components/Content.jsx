@@ -6,9 +6,10 @@ const Content = () => {
     <Box
       sx={{
         position: 'fixed',
-        bottom: 0, // Adjust the value for desired spacing from the bottom
+        bottom: 260, // Adjust the value for desired spacing from the bottom
         right: 16, // Adjust the value for desired spacing from the right
         padding: 4,
+        width: '70%',
         textAlign: 'center',
         backgroundColor: 'white', // Optional: background color to make it stand out
       }}
@@ -23,15 +24,22 @@ const Content = () => {
         Welcome to Our School Portal
       </Typography>
       <Typography
+      
         variant="h5"
         paragraph
         sx={{
           fontFamily: 'Poppins, sans-serif', // Apply premium font
+          width: '40%',
+          marginLeft: 'auto',
+          marginRight: 'auto', // Center the text horizontally
+          justifyContent:"space-evenly"
         }}
       >
         Our school is dedicated to providing a top-notch education and fostering a strong community.
       </Typography>
-     
+
+=======
+
     </Box>
   );
 };

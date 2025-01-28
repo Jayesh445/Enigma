@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import for navigation
+import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
 import {
   Button,
   CircularProgress,
@@ -13,47 +13,48 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-const SignInPage = () => {
+const RegisterPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); // Hook to navigate to other routes
 
-  const handleSignIn = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("https://localhost:5173/api/login", {
+      const response = await fetch("https://localhost:5173/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (!response.ok) {
-        throw new Error("Invalid email or password. Please try again.");
+        throw new Error("Registration failed. Please try again.");
       }
 
       const data = await response.json();
-      console.log("Login successful:", data);
+      console.log("API Response:", data);
 
-      // Redirect to another route on successful sign-in
-      navigate("/dashboard", { state: { userData: data } });
+      // Redirect to /Exams route with user data
+      navigate("/Exams", { state: { userData: data } });
 
       // Snackbar success message
-      setSnackbarMessage("Sign-in successful!");
+      setSnackbarMessage("Registration successful!");
       setIsError(false);
       setOpenSnackbar(true);
     } catch (error) {
       console.error("Error:", error);
-      setSnackbarMessage("Sign-in failed. Please check your credentials.");
+      setSnackbarMessage("Registration failed. Please check your details and try again.");
       setIsError(true);
       setOpenSnackbar(true);
     } finally {
@@ -66,7 +67,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-500 to-indigo-600 min-h-screen flex justify-center items-center">
+    <div className="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex justify-center items-center">
       <Container component="main" maxWidth="xs">
         <Card
           sx={{
@@ -81,8 +82,8 @@ const SignInPage = () => {
             width: "100%",
           }}
         >
-          <Typography variant="h5" component="h1" className="text-indigo-600 text-center mb-6">
-            Sign In
+          <Typography variant="h5" component="h1" className="text-blue-600 text-center mb-6">
+            Register
           </Typography>
 
           {/* Snackbar for feedback */}
@@ -94,7 +95,32 @@ const SignInPage = () => {
             <Alert severity={isError ? "error" : "success"}>{snackbarMessage}</Alert>
           </Snackbar>
 
-          <form className="w-full" noValidate onSubmit={handleSignIn}>
+          <form className="w-full" noValidate onSubmit={handleRegister}>
+            {/* Name Input */}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete="name"
+              autoFocus
+              className="mb-4"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{
+                transition: "all 0.3s ease",
+                "&:focus-within": {
+                  borderColor: "#3f51b5",
+                },
+              }}
+            />
+
             {/* Email Input */}
             <TextField
               variant="outlined"
@@ -107,7 +133,6 @@ const SignInPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="email"
-              autoFocus
               className="mb-4"
               InputLabelProps={{
                 shrink: true,
@@ -159,34 +184,17 @@ const SignInPage = () => {
               }}
             />
 
-            {/* Sign-In Button */}
+            {/* Register Button */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-indigo-700 transition-all duration-300 ease-in-out"
+              className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300 ease-in-out"
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Sign In"}
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Register"}
             </Button>
-
-            {/* Sign-Up Link */}
-            <div className="text-center">
-              <Typography variant="body2" color="textSecondary">
-                Don't have an account?{" "}
-                <a
-                  href="/register"
-                  className="text-indigo-500 hover:underline"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/register");
-                  }}
-                >
-                  Sign Up
-                </a>
-              </Typography>
-            </div>
           </form>
         </Card>
       </Container>
@@ -194,4 +202,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default RegisterPage;
