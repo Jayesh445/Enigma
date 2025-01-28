@@ -3,3 +3,7 @@ be in frame
 no tab switch
 no screen share 
 noice decction 
+
+MONGODB_URI = mongodb+srv://adityachaurasia90:Pt3nrINh0y2ego6X@cluster0.47orx.mongodb.net/
+JWT_SECRET=nocodespace
+PORT=8080
