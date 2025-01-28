@@ -13,9 +13,8 @@ import {
 } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 
-const SignInPage = () => {
+const LoginPage = () => {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -30,9 +29,8 @@ const SignInPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/register", // Your backend API for login
+        "http://localhost:8080/api/login", // Your backend API for login
         {
-          name,
           email,
           password,
         },
@@ -40,9 +38,11 @@ const SignInPage = () => {
           withCredentials: true, // Send cookies with the request for cross-origin requests
         }
       );
+
       if (res.data.success) {
         window.location.href = "/dashboard";
       }
+
       setLoading(false);
       setSnackbarMessage("Sign In Successful");
       setOpenSnackbar(true);
@@ -80,7 +80,7 @@ const SignInPage = () => {
             component="h1"
             className="text-blue-600 text-center mb-6"
           >
-            Sign In
+            Log In
           </Typography>
 
           {/* Snackbar for feedback */}
@@ -95,22 +95,6 @@ const SignInPage = () => {
           </Snackbar>
 
           <form className="w-full" noValidate onSubmit={handleSignIn}>
-            {/* Name Input */}
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-              autoFocus
-              className="mb-4"
-            />
-
             {/* Email Input */}
             <TextField
               variant="outlined"
@@ -171,7 +155,7 @@ const SignInPage = () => {
               ) : (
                 <>
                   <LockOutlined className="mr-2" />
-                  Sign In
+                  Log In
                 </>
               )}
             </Button>
@@ -194,4 +178,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default LoginPage;

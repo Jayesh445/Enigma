@@ -22,6 +22,7 @@ export const Register = async (req, res) => {
 
     // Create a new user
     const newUser = new User({ name, email, password: hash });
+    console.log(name, email, hash);
     await newUser.save();
 
     return res.status(201).json({
@@ -100,3 +101,5 @@ export const updatePassword = async (req, res) => {
     .status(200)
     .json({ message: "Password updated successfully", success: true });
 };
+
+export const copyDector = async (req, res) => {};
