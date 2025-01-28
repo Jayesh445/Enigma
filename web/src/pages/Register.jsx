@@ -193,7 +193,7 @@ const RegisterPage = () => {
               className="py-4 mb-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300 ease-in-out"
               disabled={loading}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : "Register"}
+              {loading ? <CircularProgress size={25} color="inherit" /> : "Register"}
             </Button>
           </form>
         </Card>
