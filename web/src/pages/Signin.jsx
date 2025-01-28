@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Button,
   CircularProgress,
@@ -22,23 +23,38 @@ const SignInPage = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     setIsError(false);
 
-    setTimeout(() => {
-      setLoading(false);
-      if (email === "test@example.com" && password === "password") {
-        setSnackbarMessage("Sign In Successful");
-        setOpenSnackbar(true);
-        setIsError(false);
-      } else {
-        setSnackbarMessage("Invalid email or password");
-        setOpenSnackbar(true);
-        setIsError(true);
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/register", // Your backend API for login
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          withCredentials: true, // Send cookies with the request for cross-origin requests
+        }
+      );
+
+      if (res.data.success) {
+        window.location.href = "/quiz";
       }
-    }, 2000);
+
+      setLoading(false);
+      setSnackbarMessage("Sign In Successful");
+      setOpenSnackbar(true);
+      setIsError(false);
+    } catch (error) {
+      setLoading(false);
+      setSnackbarMessage("Invalid email or password");
+      setOpenSnackbar(true);
+      setIsError(true);
+    }
   };
 
   const handleClickShowPassword = () => {
@@ -186,7 +202,7 @@ const SignInPage = () => {
 
             {/* Sign-In Button */}
             <Button
-              type="submit"
+              onClick={handleSignIn}
               fullWidth
               variant="contained"
               color="primary"

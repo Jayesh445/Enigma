@@ -40,7 +40,7 @@ const LoginPage = () => {
       );
 
       if (res.data.success) {
-        window.location.href = "/dashboard";
+        window.location.href = "/quiz";
       }
 
       setLoading(false);
