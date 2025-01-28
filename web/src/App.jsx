@@ -17,6 +17,7 @@ function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/register" element={<RegisterPage/>}/>
         {/* <Route path="/paper-exams" element={<Signin} */}
+        <Route path="/Initial" element={<ExamInitial/>}/>
         
         
       </Routes>

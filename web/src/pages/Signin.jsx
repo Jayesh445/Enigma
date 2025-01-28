@@ -45,7 +45,7 @@ const SignInPage = () => {
       console.log("Login successful:", data);
 
       // Redirect to another route on successful sign-in
-      navigate("/dashboard", { state: { userData: data } });
+      navigate("/Initial", { state: { userData: data } });
 
       // Snackbar success message
       setSnackbarMessage("Sign-in successful!");
