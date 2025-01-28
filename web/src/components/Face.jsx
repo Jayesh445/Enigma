@@ -151,16 +151,16 @@ const EmotionActionDetector = () => {
   }, [loading, lastPosition, lastEyeMovement, eyeMovementStartTime, gazeDirection]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
+    <div>
       <h1 className="text-xl font-bold mb-4">Tension and Gaze Detector</h1>
-      <div style={{ position: "relative", width: "640px", height: "480px" }}>
+      <div style={{ position: "relative" }}>
         <video
           ref={videoRef}
           autoPlay
           muted
           onPlay={() => setLoading(false)}
           className="rounded-lg shadow-md"
-          style={{ position: "absolute", top: 0, left: 0, width: "640px", height: "480px" }}
+          style={{ position: "absolute", top: 0, left: 0}}
         />
         <canvas
           ref={canvasRef}
